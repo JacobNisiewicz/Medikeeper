@@ -50,8 +50,17 @@ export default class Items extends React.Component {
         })
     }
 
+    getAllError = (error) => {
+        console.log(error)
+    }
+
     editItem = (item) => {
-        this.props.history.push("/itemForm", item)
+        console.log(item)
+        this.setState(() => {
+            return {
+                editItem: item
+            }
+        })
     }
 
     refreshItems = () => {
@@ -69,14 +78,6 @@ export default class Items extends React.Component {
         )
     }
 
-    getAllError = (error) => {
-        console.log(error)
-    }
-
-    addEditClick = () => {
-        this.props.history.push("/itemForm")
-    }
-
     submit = (formValues) => {
         console.log(formValues)
         const itemDetails = {
@@ -86,7 +87,6 @@ export default class Items extends React.Component {
         itemsService.addItem(itemDetails)
             .then(this.addItemSuccess)
             .catch(this.addItemError)
-
 
     }
 
@@ -158,84 +158,88 @@ export default class Items extends React.Component {
                             </Formik>
                         </div>
                     </div>
-                    {this.state.itemCost ? (<div className="col">
-                        <div className="card col-sm-3 m-3"><div>Cost ${this.state.itemCost}</div></div>
+                    {this.state.itemCost ? (<div className="col-sm-5 card shadow">
+                        <div ><h3 style={{ textAlign: "center" }} className="m-3">Cost ${this.state.itemCost}</h3></div>
                     </div>) : null}
 
                 </div>
 
 
                 <div className="row mt-5">
-                    <div className="getAllItems col-sm-5 ">
+                    <div className=" getAllItems col-sm-5 ">
+                        <div><h3>Get a List of All Costs</h3></div>
                         <div className="row my-2">
-                            <button className="btn btn-primary col-12" type="submit" onClick={this.getAll}>
-                                Get All
+                            <div className="col-12">
+                                <button className="btn btn-primary col-12" type="submit" onClick={this.getAll}>
+                                    Get All
                                     </button>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-sm-3">{this.state.mappedCost}</div>
+                    <div className="col-sm-5">{this.state.mappedCost}</div>
                 </div>
 
-                <div className="card itemForm shadow col-sm-5 mt-5">
-                    <div className="m-3">
-                        <div style={{ textAlign: "center" }}><h3>Add Item</h3></div>
-                        <Formik
-                            enableReinitialize={true}
-                            onSubmit={this.submit}
-                            render={formikProps => (
-                                <Form >
-                                    <div >
-                                        <label
-                                            htmlFor="itemName"
-                                        >
-                                            <strong>Item Name</strong>
-                                        </label>
-                                        <Field
-                                            name="itemName"
-                                            component="input"
-                                            placeholder="Item Name"
-                                            className="form-control"
-                                            value={formikProps.itemName}
-                                        />
-                                        {formikProps.touched.itemName &&
-                                            formikProps.errors.itemName && (
-                                                <div className="text-danger">
-                                                    {formikProps.errors.itemName}
-                                                </div>
-                                            )}
-                                    </div>
-                                    <div >
-                                        <label
-                                            htmlFor="cost"
-                                        >
-                                            <strong>Cost</strong>
-                                        </label>
-                                        <Field
-                                            name="cost"
-                                            placeholder="Cost"
-                                            component="input"
-                                            className="form-control"
-                                            value={formikProps.cost}
-                                        />
-                                        {formikProps.touched.cost &&
-                                            formikProps.errors.cost && (
-                                                <div className="text-danger">
-                                                    {formikProps.errors.cost}
-                                                </div>
-                                            )}
-                                    </div>
-                                    <div >
+                <div className="row">
+                    <div className="card itemForm shadow col-sm-5 mt-5">
+                        <div className="m-3">
+                            <div style={{ textAlign: "center" }}><h3>Item Form</h3></div>
+                            <Formik
+                                enableReinitialize={true}
+                                onSubmit={this.submit}
+                                render={formikProps => (
+                                    <Form >
+                                        <div >
+                                            <label
+                                                htmlFor="itemName"
+                                            >
+                                                <strong>Item Name</strong>
+                                            </label>
+                                            <Field
+                                                name="itemName"
+                                                component="input"
+                                                placeholder="Item Name"
+                                                className="form-control"
+                                                value={formikProps.itemName}
+                                            />
+                                            {formikProps.touched.itemName &&
+                                                formikProps.errors.itemName && (
+                                                    <div className="text-danger">
+                                                        {formikProps.errors.itemName}
+                                                    </div>
+                                                )}
+                                        </div>
+                                        <div >
+                                            <label
+                                                htmlFor="cost"
+                                            >
+                                                <strong>Cost</strong>
+                                            </label>
+                                            <Field
+                                                name="cost"
+                                                placeholder="Cost"
+                                                component="input"
+                                                className="form-control"
+                                                value={formikProps.cost}
+                                            />
+                                            {formikProps.touched.cost &&
+                                                formikProps.errors.cost && (
+                                                    <div className="text-danger">
+                                                        {formikProps.errors.cost}
+                                                    </div>
+                                                )}
+                                        </div>
+                                        <div >
 
-                                        <button type="submit" className="btn-shadow my-3 btn btn-primary btn-sm">
-                                            Submit
+                                            <button type="submit" className="btn-shadow my-3 btn btn-primary btn-sm">
+                                                Submit
                       </button>
-                                    </div>
-                                </Form>
-                            )}
-                        ></Formik>
+                                        </div>
+                                    </Form>
+                                )}
+                            ></Formik>
+                        </div>
                     </div>
                 </div>
-
 
             </React.Fragment>
         )
