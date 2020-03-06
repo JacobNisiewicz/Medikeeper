@@ -1,7 +1,6 @@
 ﻿clear
 $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
-$nodePath = $dir + "\node";
 $reactPath = $dir + "\react";
 $dotnetPath = $dir + "\dotnet";
 

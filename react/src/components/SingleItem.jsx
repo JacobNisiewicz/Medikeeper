@@ -5,14 +5,14 @@ import * as itemsService from '../services/itemsService';
 
 const SingleItem = (props) => {
 
-    const editItem = () => {
-        let itemValue = {
-            id: props.item.id,
-            itemName: props.item.itemName,
-            cost: props.item.cost
-        }
-        props.edit(itemValue)
-    };
+    // const editItem = () => {
+    //     let itemValue = {
+    //         id: props.item.id,
+    //         itemName: props.item.itemName,
+    //         cost: props.item.cost
+    //     }
+    //     props.edit(itemValue)
+    // };
 
     const deleteClick = (e) => {
         e.preventDefault();
@@ -36,13 +36,23 @@ const SingleItem = (props) => {
 
     return (
         <React.Fragment>
-            <div className="container-fluid card my-2">
+            <div className="container-fluid card my-2 shadow">
                 <div>Item Name: {props.item.itemName}</div>
-                <div>Cost ${props.item.cost}</div>
-                <button className="btn btn-primary col-3" type="button" onClick={editItem}>Edit</button>
-                <button className="btn btn-danger col-3" type="button" onClick={deleteClick}>Delete</button>
-            </div>
 
+
+                <div>Cost ${props.item.cost}</div>
+
+                <div className="row m-2 ">
+                    {/* <div className="mx-3">
+                        <button className="btn btn-primary" type="button" onClick={editItem}>Edit</button>
+                    </div> */}
+                    <div className="mx-3">
+
+                        <button className="btn btn-danger" type="button" onClick={deleteClick}>Delete</button>
+                    </div>
+
+                </div>
+            </div>
         </React.Fragment>
     )
 }
