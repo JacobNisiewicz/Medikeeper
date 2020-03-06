@@ -23,13 +23,7 @@ const onGlobalError = err => {
 };
 
 const API_HOST_PREFIX = process.env.REACT_APP_API_HOST_PREFIX;
-const API_NODE_HOST_PREFIX = process.env.REACT_APP_API_NODE_HOST_PREFIX;
 
-logger({ API_HOST_PREFIX, API_NODE_HOST_PREFIX });
+logger({ API_HOST_PREFIX });
 
-export {
-  onGlobalError,
-  onGlobalSuccess,
-  API_HOST_PREFIX,
-  API_NODE_HOST_PREFIX
-};
+export { onGlobalError, onGlobalSuccess, API_HOST_PREFIX };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field } from "formik";
 import * as itemsService from '../services/itemsService';
-// import { PropTypes } from "prop-types";
+import { PropTypes } from "prop-types";
 
 const ItemForm = (props) => {
     console.log(props)
@@ -13,6 +13,16 @@ const ItemForm = (props) => {
             cost: formValues.cost
         }
         itemsService.addItem(itemDetails)
+            .then(addItemSuccess)
+            .catch(addItemError)
+    }
+
+    const addItemSuccess = () => {
+        props.refresh()
+    }
+
+    const addItemError = () => {
+
     }
 
     return (
@@ -20,11 +30,10 @@ const ItemForm = (props) => {
 
             <div className="card itemForm shadow col-sm-5">
                 <div className="m-3">
-                    <div style={{ textAlign: "center" }}><h3>Add or Edit Item</h3></div>
+                    <div style={{ textAlign: "center" }}><h3>Add Form</h3></div>
                     <Formik
                         enableReinitialize={true}
                         onSubmit={submit}
-                        // validationSchema={""}
                         render={formikProps => (
                             <Form >
                                 <div >
@@ -81,8 +90,8 @@ const ItemForm = (props) => {
         </React.Fragment>
     )
 }
-// ItemForm.PropTypes = {
-
-// }
+ItemForm.propTypes = {
+    refresh: PropTypes.func
+}
 
 export default ItemForm;

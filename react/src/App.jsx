@@ -1,5 +1,4 @@
 import "./App.css";
-import "./services/autoLogInService.js";
 import "react-toastify/dist/ReactToastify.css";
 import logger from "./logger";
 import React, { Component } from "react";

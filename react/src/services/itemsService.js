@@ -1,13 +1,14 @@
 import axios from "axios";
 import { API_HOST_PREFIX } from "./serviceHelpers";
 
-const rootUrl = `${API_HOST_PREFIX}/items`;
+const rootUrl = `${API_HOST_PREFIX}/api/items`;
 
 let getCost = value => {
   let url = rootUrl + `/cost/${value.itemName}`;
   const config = {
     method: "GET",
     url: url,
+    withCredentials: true,
     header: {
       "Content-Type": "application/json"
     }
