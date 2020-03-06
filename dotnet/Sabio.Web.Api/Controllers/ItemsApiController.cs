@@ -89,6 +89,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult<ItemResponse<int>> Create(ItemAddRequest model)
         {
             ObjectResult result = null;
@@ -112,6 +113,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [AllowAnonymous]
         public ActionResult<SuccessResponse> Update(ItemUpdateRequest model)
         {
             int code = 200;
@@ -132,6 +134,7 @@ namespace Sabio.Web.Api.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [AllowAnonymous]
         public ActionResult<SuccessResponse> DeleteById(int id)
         {
             int code = 200;

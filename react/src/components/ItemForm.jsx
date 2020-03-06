@@ -21,8 +21,8 @@ const ItemForm = (props) => {
         props.refresh()
     }
 
-    const addItemError = () => {
-
+    const addItemError = (error) => {
+        console.log(error)
     }
 
     return (
