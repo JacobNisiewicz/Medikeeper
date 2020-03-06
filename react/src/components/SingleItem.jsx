@@ -1,0 +1,58 @@
+import React from "react"
+import PropTypes from "prop-types";
+import * as itemsService from '../services/itemsService';
+
+
+const SingleItem = (props) => {
+
+    const editItem = () => {
+        let itemValue = {
+            id: props.item.id,
+            itemName: props.item.itemName,
+            cost: props.item.cost
+        }
+        props.edit(itemValue)
+    };
+
+    const deleteClick = (e) => {
+        e.preventDefault();
+        let itemId = props.item.id;
+        deleteItemById(itemId);
+    };
+
+    const deleteItemById = data => {
+        itemsService.deleteItem(data)
+            .then(onDeleteSuccess)
+            .catch(onDeleteError)
+    };
+
+    const onDeleteSuccess = () => {
+        props.delete(props.item.id)
+    };
+
+    const onDeleteError = (error) => {
+        console.log(error)
+    };
+
+    return (
+        <React.Fragment>
+            <div className="container-fluid card my-2">
+                <div>Item Name: {props.item.itemName}</div>
+                <div>Cost ${props.item.cost}</div>
+                <button className="btn btn-primary col-3" type="button" onClick={editItem}>Edit</button>
+                <button className="btn btn-danger col-3" type="button" onClick={deleteClick}>Delete</button>
+            </div>
+
+        </React.Fragment>
+    )
+}
+SingleItem.propTypes = {
+    edit: PropTypes.func,
+    delete: PropTypes.func,
+    item: PropTypes.shape({
+        id: PropTypes.number,
+        itemName: PropTypes.string,
+        cost: PropTypes.number
+    })
+}
+export default SingleItem
