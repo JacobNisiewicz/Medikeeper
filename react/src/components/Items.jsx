@@ -94,8 +94,8 @@ export default class Items extends React.Component {
         this.refreshItems()
     }
 
-    addItemError = () => {
-
+    addItemError = (error) => {
+        console.log(error)
     }
 
     render() {
