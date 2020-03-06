@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
 
 namespace Sabio.Services
@@ -45,15 +44,7 @@ namespace Sabio.Services
                          
                     }
 
-                    var groupedItemList = list
-                    .GroupBy(i => i.ItemName)
-                    .Select(grp => grp.ToList())
-                    .ToList();
-
-
                     list.Add(item);
-
-                   
                 }
             );
             return list;
