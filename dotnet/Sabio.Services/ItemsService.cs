@@ -40,10 +40,7 @@ namespace Sabio.Services
                     if (list == null)
                     {
                         list = new List<Items>();
-
-                         
                     }
-
                     list.Add(item);
                 }
             );
@@ -63,9 +60,7 @@ namespace Sabio.Services
             },
             delegate (IDataReader reader, short set)
             {
-
                 int startingIndex = 0;
-
                 cost = reader.GetSafeInt32(startingIndex++);
             }
             );
@@ -75,7 +70,7 @@ namespace Sabio.Services
         public int Add(ItemAddRequest model)
         {
             int id = 0;
-            string procName = "dbo.Items_Insert";
+            string procName = "dbo.Item_Insert";
             _data.ExecuteNonQuery(procName, inputParamMapper: delegate (SqlParameterCollection col)
             {
                 CommonParams(model, col);
@@ -91,13 +86,12 @@ namespace Sabio.Services
 
                 int.TryParse(outId.ToString(), out id);
             });
-
             return id;
         }
 
         public void Update(ItemUpdateRequest model)
         {
-            string procName = "dbo.Items_Update";
+            string procName = "dbo.Item_Update";
             _data.ExecuteNonQuery(procName, inputParamMapper: delegate (SqlParameterCollection col)
             {
                 CommonParams(model, col);
@@ -127,7 +121,6 @@ namespace Sabio.Services
             Items item = new Items();
 
             int startingIndex = 0;
-
             item.Id = reader.GetSafeInt32(startingIndex++);
             item.ItemName = reader.GetSafeString(startingIndex++);
             item.Cost = reader.GetSafeInt32(startingIndex++);

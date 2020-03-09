@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_HOST_PREFIX } from "./serviceHelpers";
+import { API_HOST_PREFIX, onGlobalError } from "./serviceHelpers";
 
 const rootUrl = `${API_HOST_PREFIX}api/items`;
 
 let getCost = value => {
-  let url = rootUrl + `/cost/${value.itemName}`;
+  let url = rootUrl + `/cost/${value}`;
   const config = {
     method: "GET",
     url: url,
@@ -13,7 +13,13 @@ let getCost = value => {
       "Content-Type": "application/json"
     }
   };
-  return axios(config);
+  return axios(config)
+    .then(res => {
+      return {
+        itemCost: res.data.item
+      };
+    })
+    .catch(onGlobalError);
 };
 
 let getAll = () => {
@@ -37,19 +43,30 @@ let addItem = data => {
     },
     data: data
   };
-  return axios(config);
+  return axios(config)
+    .then(res => {
+      return {
+        ...data,
+        id: res.data.item
+      };
+    })
+    .catch(onGlobalError);
 };
 
-let updateItem = id => {
+let updateItem = data => {
+  let id = data.id;
   let url = rootUrl + `/${id}`;
   const config = {
     method: "PUT",
     url: url,
     header: {
       "Content-Type": "application/json"
-    }
+    },
+    data: data
   };
-  return axios(config);
+  return axios(config)
+    .then(() => data)
+    .catch(onGlobalError);
 };
 
 let deleteItem = id => {

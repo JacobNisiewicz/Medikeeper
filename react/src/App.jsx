@@ -5,8 +5,7 @@ import React, { Component } from "react";
 import { withRouter, Route } from "react-router-dom";
 import { Container } from "reactstrap";
 import { ToastContainer } from "react-toastify";
-import Items from './components/Items';
-import ItemForm from './components/ItemForm';
+import Items from './components/item/Items';
 
 const _logger = logger.extend("App");
 
@@ -27,7 +26,6 @@ class App extends Component {
         <Container>
 
           <Route path="/" exact={true} component={Items} />
-          <Route path="/itemForm" exact={true} component={ItemForm} />
 
         </Container>
       </React.Fragment>
